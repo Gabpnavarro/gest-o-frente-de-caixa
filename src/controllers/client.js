@@ -4,6 +4,8 @@ const { formatName, formatEmail } = require('../utils/formatData');
 const { getClients } = require('../utils/getClients');
 
 const registerClient = async (req, res) => {
+  // #swagger.tags = ['Clients']
+  // #swagger.description = 'Endpoint responsável por cadastrar um cliente.'
   const { nome, email, cpf, cep, numero } = req.body;
 
   try {
@@ -45,6 +47,8 @@ const registerClient = async (req, res) => {
 };
 
 const listClients = async (req, res) => {
+  // #swagger.tags = ['Clients']
+  // #swagger.description = 'Endpoint responsável por listar clientes.'
   try {
     const clients = await getClients();
     return res.status(200).json(clients);
@@ -56,6 +60,8 @@ const listClients = async (req, res) => {
 };
 
 const updateClient = async (req, res) => {
+  // #swagger.tags = ['Clients']
+  // #swagger.description = 'Endpoint responsável por atualizar um cliente passado por parâmetro.'
   const { id } = req.params;
   const { nome, email, cpf, cep, numero } = req.body;
 
@@ -101,6 +107,9 @@ const updateClient = async (req, res) => {
 };
 
 const detailClient = async (req, res) => {
+  // #swagger.tags = ['Clients']
+  // #swagger.description = 'Endpoint responsável por detalhar um cliente passado por parâmetro.'
+  // #swagger.parameters['id'] = { description: 'ID do cliente.' }
   const { id } = req.params;
 
   try {

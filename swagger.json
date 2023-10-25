@@ -1,0 +1,205 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Documentação API Gestão de Frente de Caixa",
+    "description": "Projeto desenvolvido ao longo do Móduio final do Curso de Desenvolvimento de Software com Foco em Back-end da Cubos Academy.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/categoria": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "Endpoint para listar as categorias cadastradas.",
+        "responses": {
+          "200": {
+            "description": "Erro Interno do Servidor.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerError"
+            }
+          },
+          "500": {
+            "description": "Sucesso.",
+            "schema": {
+              "$ref": "#/definitions/listCategories"
+            }
+          }
+        }
+      }
+    },
+    "/cliente": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "Endpoint responsável por listar clientes.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/cliente/{id}": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "Endpoint responsável por detalhar um cliente passado por parâmetro.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do cliente."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "Endpoint responsável por atualizar um cliente passado por parâmetro.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "cpf": {
+                  "example": "any"
+                },
+                "nome": {
+                  "example": "any"
+                },
+                "cep": {
+                  "example": "any"
+                },
+                "numero": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/cliente/": {
+      "post": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "Endpoint responsável por cadastrar um cliente.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "cpf": {
+                  "example": "any"
+                },
+                "nome": {
+                  "example": "any"
+                },
+                "cep": {
+                  "example": "any"
+                },
+                "numero": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InternalServerError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        }
+      }
+    },
+    "listCategories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 2
+          },
+          "descricao": {
+            "type": "string",
+            "example": "Celulares"
+          }
+        }
+      }
+    }
+  }
+}
