@@ -3,11 +3,11 @@ const knex = require('../connection');
 const getAllCategories = async (req, res) => {
   // #swagger.tags = ['Categories']
   // #swagger.description = 'Endpoint para listar as categorias cadastradas.'
-  /* #swagger.responses[200] = {
+  /* #swagger.responses[500] = {
       schema: { $ref: "#/definitions/InternalServerError" },
       description: 'Erro Interno do Servidor.'
 } */
-  /* #swagger.responses[500] = {
+  /* #swagger.responses[200] = {
       schema: { $ref: "#/definitions/listCategories" },
       description: 'Sucesso.'
 } */

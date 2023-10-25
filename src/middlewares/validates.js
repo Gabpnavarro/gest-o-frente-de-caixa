@@ -107,6 +107,10 @@ const validateExistProduct = async (req, res, next) => {
 };
 
 const validateExistClient = async (req, res, next) => {
+  /* #swagger.responses[404] = {
+      schema: { message: "Cliente não encontrado" },
+      description: 'Cliente não existente.'
+} */
   const { id } = req.params;
 
   try {
@@ -300,11 +304,9 @@ const validateDeleteProduct = async (req, res, next) => {
       .where('produto_id', id)
       .first();
     if (productOnOrder) {
-      return res
-        .status(400)
-        .json({
-          mensagem: 'Este produto está em um pedido e não pode ser deletado',
-        });
+      return res.status(400).json({
+        mensagem: 'Este produto está em um pedido e não pode ser deletado',
+      });
     }
     next();
   } catch (error) {

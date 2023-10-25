@@ -27,6 +27,26 @@ const doc = {
         descricao: 'Celulares',
       },
     ],
+    addClient: {
+      nome: 'Joao Silva',
+      email: 'joaoSilva@gmail.com',
+      cpf: '22233322222',
+      cep: '40000000',
+      numero: 12,
+    },
+    getOneClient: {
+      id: 1,
+      nome: 'Maria Das Dores',
+      email: 'dorinhamilgrau@gmail.com',
+      cpf: '12345612345',
+      cep: '41223333',
+      rua: 'Rua joão das neves',
+      numero: 18,
+      bairro: 'Ondina',
+      cidade: 'Salvador',
+      estado: 'Bahia',
+    },
+    getClients: [{ $ref: '#/definitions/getOneClient' }],
   },
 };
 

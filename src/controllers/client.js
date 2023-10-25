@@ -6,6 +6,24 @@ const { getClients } = require('../utils/getClients');
 const registerClient = async (req, res) => {
   // #swagger.tags = ['Clients']
   // #swagger.description = 'Endpoint responsável por cadastrar um cliente.'
+  /*  #swagger.parameters['obj'] = {
+      in: 'body',
+      description: 'Dados para cadastrar um cliente',
+      schema:{ $ref: "#/definitions/addClient" }
+    }
+   */
+  /* #swagger.responses[500] = {
+      schema: { $ref: "#/definitions/InternalServerError" },
+      description: 'Erro Interno do Servidor.'
+} */
+  /* #swagger.responses[400] = {
+      schema: { message: "O CEP não existe" },
+      description: 'CEP Inválido.'
+} */
+  /* #swagger.responses[201] = {
+      schema: { message: "Cliente cadastrado com sucesso!" },
+      description: 'Sucesso.'
+} */
   const { nome, email, cpf, cep, numero } = req.body;
 
   try {
@@ -49,6 +67,14 @@ const registerClient = async (req, res) => {
 const listClients = async (req, res) => {
   // #swagger.tags = ['Clients']
   // #swagger.description = 'Endpoint responsável por listar clientes.'
+  /* #swagger.responses[200] = {
+      schema: { $ref: "#/definitions/getClients" },
+      description: 'Sucesso.'
+} */
+  /* #swagger.responses[500] = {
+      schema: { $ref: "#/definitions/InternalServerError" },
+      description: 'Erro Interno do Servidor.'
+} */
   try {
     const clients = await getClients();
     return res.status(200).json(clients);
@@ -62,6 +88,25 @@ const listClients = async (req, res) => {
 const updateClient = async (req, res) => {
   // #swagger.tags = ['Clients']
   // #swagger.description = 'Endpoint responsável por atualizar um cliente passado por parâmetro.'
+  /* #swagger.parameters['id'] = { in: 'path', description: 'ID do cliente' } */
+  /*  #swagger.parameters['obj'] = {
+      in: 'body',
+      description: 'Dados para atualizar um cliente',
+      schema:{ $ref: "#/definitions/addClient" }
+    }
+   */
+  /* #swagger.responses[500] = {
+      schema: { $ref: "#/definitions/InternalServerError" },
+      description: 'Erro Interno do Servidor.'
+} */
+  /* #swagger.responses[400] = {
+      schema: { message: "O CEP não existe" },
+      description: 'CEP Inválido.'
+} */
+  /* #swagger.responses[200] = {
+      schema: { message: "Atualização realizada com sucesso!" },
+      description: 'Sucesso.'
+} */
   const { id } = req.params;
   const { nome, email, cpf, cep, numero } = req.body;
 
@@ -109,7 +154,15 @@ const updateClient = async (req, res) => {
 const detailClient = async (req, res) => {
   // #swagger.tags = ['Clients']
   // #swagger.description = 'Endpoint responsável por detalhar um cliente passado por parâmetro.'
-  // #swagger.parameters['id'] = { description: 'ID do cliente.' }
+  /* #swagger.parameters['id'] = { in: 'path', description: 'ID do cliente' } */
+  /* #swagger.responses[200] = {
+      schema: { $ref: "#/definitions/getOneClient" },
+      description: 'Sucesso.'
+} */
+  /* #swagger.responses[500] = {
+      schema: { $ref: "#/definitions/InternalServerError" },
+      description: 'Erro Interno do Servidor.'
+} */
   const { id } = req.params;
 
   try {

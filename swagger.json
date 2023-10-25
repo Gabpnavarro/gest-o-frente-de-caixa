@@ -19,15 +19,15 @@
         "description": "Endpoint para listar as categorias cadastradas.",
         "responses": {
           "200": {
-            "description": "Erro Interno do Servidor.",
-            "schema": {
-              "$ref": "#/definitions/InternalServerError"
-            }
-          },
-          "500": {
             "description": "Sucesso.",
             "schema": {
               "$ref": "#/definitions/listCategories"
+            }
+          },
+          "500": {
+            "description": "Erro Interno do Servidor.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerError"
             }
           }
         }
@@ -41,10 +41,16 @@
         "description": "Endpoint responsável por listar clientes.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Sucesso.",
+            "schema": {
+              "$ref": "#/definitions/getClients"
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Erro Interno do Servidor.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerError"
+            }
           }
         }
       }
@@ -61,18 +67,36 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "ID do cliente."
+            "description": "ID do cliente"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Sucesso.",
+            "schema": {
+              "$ref": "#/definitions/getOneClient"
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Cliente não existente.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Cliente não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Erro Interno do Servidor.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerError"
+            }
           }
         }
       },
@@ -86,45 +110,69 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID do cliente"
           },
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "Dados para atualizar um cliente",
             "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                },
-                "cpf": {
-                  "example": "any"
-                },
-                "nome": {
-                  "example": "any"
-                },
-                "cep": {
-                  "example": "any"
-                },
-                "numero": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/addClient"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Atualização realizada com sucesso!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "CEP Inválido.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "O CEP não existe"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Cliente não existente.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Cliente não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Erro Interno do Servidor.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerError"
+            }
           }
         }
       }
@@ -137,39 +185,50 @@
         "description": "Endpoint responsável por cadastrar um cliente.",
         "parameters": [
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "Dados para cadastrar um cliente",
             "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                },
-                "cpf": {
-                  "example": "any"
-                },
-                "nome": {
-                  "example": "any"
-                },
-                "cep": {
-                  "example": "any"
-                },
-                "numero": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/addClient"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Cliente cadastrado com sucesso!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "CEP Inválido.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "O CEP não existe"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Erro Interno do Servidor.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerError"
+            }
           }
         }
       }
@@ -199,6 +258,82 @@
             "example": "Celulares"
           }
         }
+      }
+    },
+    "addClient": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Joao Silva"
+        },
+        "email": {
+          "type": "string",
+          "example": "joaoSilva@gmail.com"
+        },
+        "cpf": {
+          "type": "string",
+          "example": "22233322222"
+        },
+        "cep": {
+          "type": "string",
+          "example": "40000000"
+        },
+        "numero": {
+          "type": "number",
+          "example": 12
+        }
+      }
+    },
+    "getOneClient": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "nome": {
+          "type": "string",
+          "example": "Maria Das Dores"
+        },
+        "email": {
+          "type": "string",
+          "example": "dorinhamilgrau@gmail.com"
+        },
+        "cpf": {
+          "type": "string",
+          "example": "12345612345"
+        },
+        "cep": {
+          "type": "string",
+          "example": "41223333"
+        },
+        "rua": {
+          "type": "string",
+          "example": "Rua joão das neves"
+        },
+        "numero": {
+          "type": "number",
+          "example": 18
+        },
+        "bairro": {
+          "type": "string",
+          "example": "Ondina"
+        },
+        "cidade": {
+          "type": "string",
+          "example": "Salvador"
+        },
+        "estado": {
+          "type": "string",
+          "example": "Bahia"
+        }
+      }
+    },
+    "getClients": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/getOneClient"
       }
     }
   }
