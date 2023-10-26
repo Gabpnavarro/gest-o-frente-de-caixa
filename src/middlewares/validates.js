@@ -281,14 +281,14 @@ const validateImage = (req, res, next) => {
   const { file } = req;
   if (!file) {
     next();
-  }
-
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    next();
   } else {
-    return res
-      .status(400)
-      .json({ message: 'Envie uma imagem no formato JPEG ou PNG' });
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      next();
+    } else {
+      return res
+        .status(400)
+        .json({ message: 'Envie uma imagem no formato JPEG ou PNG' });
+    }
   }
 };
 
