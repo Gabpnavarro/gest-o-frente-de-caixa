@@ -33,6 +33,7 @@
         }
       }
     },
+
     "/cliente": {
       "get": {
         "tags": [
@@ -222,6 +223,29 @@
               "xml": {
                 "name": "main"
               }
+            }
+          },
+          "500": {
+            "description": "Erro Interno do Servidor.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerError"
+            }
+          }
+        }
+      }
+    }
+    ,
+    "/pedido": {
+      "get": {
+        "tags": [
+          "Oders"
+        ],
+        "description": "Endpoint responsável por listar pedidos.",
+        "responses": {
+          "200": {
+            "description": "Sucesso.",
+            "schema": {
+              "$ref": "#/definitions/getOrders"
             }
           },
           "500": {
